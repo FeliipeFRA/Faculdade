@@ -1,20 +1,20 @@
 // integrantes:
 // Felipe Ferreira Rangel de Almeida - 2208490
 // Felipe Lemes Ferreira             - 2250767
-// Sérgio Luís Filippin Júnior       - 2259500
-// Vinícius Eleutério Branquinho     - 2187258
+// Sergio Luï¿½s Filippin Jï¿½nior       - 2259500
+// Vinï¿½cius Eleutï¿½rio Branquinho     - 2187258
 
 //bibliotecas utilizadas
-#include <iostream> // entrada e saída de dados
+#include <iostream> // entrada e saï¿½da de dados
 #include <cstdlib> // gerar o random
 #include <ctime> // pegar o tempo do pc como seed
-#include <algorithm> // usar a função sort, para ordenar o array
+#include <algorithm> // usar a funï¿½ï¿½o sort, para ordenar o array
 #include <bitset> // converter para binario
-#include <cmath> // função pow
+#include <cmath> // funï¿½ï¿½o pow
 
 using namespace std;
 
-// funções
+// funï¿½ï¿½es
 int gerarIndividuo(int min, int max);
 void gerarPopulacao(int populacao[], int tampop, int min, int max);
 double avaliarIndividuo(int a, int b, int c, int d, int e, int f, int x);
@@ -30,7 +30,7 @@ bool perfeito(double qualidade[], int populacao[], int tampop);
 
 int main() {
 
-    const int tampop = 10; // <------ DEFINIR O TAMANHO DA POPULAÇÃO
+    const int tampop = 10; // <------ DEFINIR O TAMANHO DA POPULAï¿½ï¿½O
     int maximo = 2000;
     int minimo = -2000;
     int a, b, c, d, e, f;
@@ -39,7 +39,7 @@ int main() {
     double taxademuta;
     int melhoresIndividuos[tampop];
 
-    // definir o numero de gerações
+    // definir o numero de geraï¿½ï¿½es
     cout << "========================================" << endl;
     cout << "           ALGORITMO GENETICO           " << endl;
     cout << "========================================" << endl;
@@ -61,12 +61,12 @@ int main() {
     cin >> taxadecross;
     taxadecross = taxadecross / 100;
 
-    // definir a taxa de mutação
+    // definir a taxa de mutaï¿½ï¿½o
     cout << "- Defina a taxa de Mutacao [em %]: ";
     cin >> taxademuta;
     taxademuta = taxademuta / 100;
 
-    // definir os coeficientes da equação
+    // definir os coeficientes da equaï¿½ï¿½o
     cout << "========================================" << endl;
     cout << "            EQUACAO PROBLEMA            " << endl;
     cout << "  ax^5 + bx4 + cx^3 + dx^2 + ex + f = 0 " << endl;
@@ -93,13 +93,13 @@ int main() {
     for (int geracao = 0; geracao < maximoGeracoes; geracao++) {
         double qualidade[tampop];
 
-        // avaliando todos os indivíduos gerados
+        // avaliando todos os indivï¿½duos gerados
         for (int i = 0; i < tampop; i++) {
             qualidade[i] = avaliarIndividuo(a, b, c, d, e, f, populacao[i]);
         }
 
 
-        // ordenando os índices da população de acordo com a qualidade dos indivíduos
+        // ordenando os ï¿½ndices da populaï¿½ï¿½o de acordo com a qualidade dos indivï¿½duos
         int indices[tampop];
         for (int i = 0; i < tampop; ++i) {
             indices[i] = i;
@@ -109,23 +109,23 @@ int main() {
         sort(indices, indices + tampop, [&](int i, int j) { return qualidade[i] < qualidade[j]; });
 
 
-        // armazenando todos os indivíduos da população ordenados por qualidade
+        // armazenando todos os indivï¿½duos da populaï¿½ï¿½o ordenados por qualidade
         for (int i = 0; i < tampop; i++) {
             melhoresIndividuos[i] = populacao[indices[i]];
         }
-        // verificando se encontrou a solução perfeita
+        // verificando se encontrou a soluï¿½ï¿½o perfeita
 
         if (perfeito(qualidade, populacao, tampop)) {
             break;
         }
 
 
-        // selecionando pais da próxima geração
+        // selecionando pais da prï¿½xima geraï¿½ï¿½o
         int paisdageracao[tampop / 2 - 1];
         selecionarPais(melhoresIndividuos, tampop, paisdageracao);
 
 
-        // convertendo pais para binário
+        // convertendo pais para binï¿½rio
         string paisbin[tampop / 2 - 1];
         paisBinario(paisbin, paisdageracao, tampop);
 
@@ -152,7 +152,7 @@ int main() {
         }
 
 
-        // identificando os índices dos menos aptos (2ª metade da populacao)
+        // identificando os ï¿½ndices dos menos aptos (2ï¿½ metade da populacao)
         int menosaptos[tampop / 2];
         for (int i = tampop / 2; i < tampop; ++i) {
             menosaptos[i - tampop / 2] = indices[i];
@@ -176,7 +176,7 @@ int main() {
     return 0;
 }
 
-// gera um indivíduo
+// gera um indivï¿½duo
 int gerarIndividuo(int min, int max) {
     static bool jaGerou = false;
     if (!jaGerou) {
@@ -189,20 +189,20 @@ int gerarIndividuo(int min, int max) {
     return individuo;
 }
 
-// gera uma população inicial
+// gera uma populaï¿½ï¿½o inicial
 void gerarPopulacao(int populacao[], int tampop, int min, int max) {
     for (int i = 0; i < tampop; i++) {
         populacao[i] = gerarIndividuo(min, max);
     }
 }
 
-// avalia o quão o indivíduo satisfaz a equação
+// avalia o quï¿½o o indivï¿½duo satisfaz a equaï¿½ï¿½o
 double avaliarIndividuo(int a, int b, int c, int d, int e, int f, int x) {
     double resultado = (a * pow(x, 5) + b * pow(x, 4) + c * pow(x, 3) + d * pow(x, 2) + e * x + f);
     return abs(resultado);
 }
 
-// seleciona pais da população atual
+// seleciona pais da populaï¿½ï¿½o atual
 void selecionarPais(const int melhoresIndividuos[], int tampop, int paisdageracao[]) {
     int metade = tampop / 2;
 
@@ -216,7 +216,7 @@ string converterBinario(int ind) {
     return bitset<32>(ind).to_string();
 }
 
-// converte os pais da geração para binario
+// converte os pais da geraï¿½ï¿½o para binario
 void paisBinario(string paisbin[], int paisdageracao[], int tampop) {
     for (int i = 0; i < tampop / 2 - 1; i++) {
         paisbin[i] = converterBinario(paisdageracao[i]);
@@ -225,25 +225,25 @@ void paisBinario(string paisbin[], int paisdageracao[], int tampop) {
 
 // faz o crossover
 void crossover(string filhosbin[], const string paisbin[], int tampop, int numFilhos, double taxadecross) {
-    // número de filhos é a metade do tamanho da população
+    // nï¿½mero de filhos ï¿½ a metade do tamanho da populaï¿½ï¿½o
 
     // for pra gerar os filhos
     for (int i = 0; i < numFilhos; i++) {
 
         double testetaxa = (double)rand() / RAND_MAX;
-        // isso gera um int e divide por um valor aleatório gigante, retornando um double entre 0 e 1
+        // isso gera um int e divide por um valor aleatï¿½rio gigante, retornando um double entre 0 e 1
 
-        // usa a taxa de crossover para testar se vai acontecer ou não
+        // usa a taxa de crossover para testar se vai acontecer ou nï¿½o
         if (testetaxa < taxadecross) {
-            // faz o crossover se o numero aleatorio entre 0 e 1 for maior q a taxa de crossover definida pelo usuário
+            // faz o crossover se o numero aleatorio entre 0 e 1 for maior q a taxa de crossover definida pelo usuï¿½rio
 
             // ponto de corte
             const int pdc = 32 / 2;
 
-            // seleciona o indice de dois pais aleatórios
+            // seleciona o indice de dois pais aleatï¿½rios
             int pai1 = rand() % (tampop / 2 - 1);
             int pai2 = rand() % (tampop / 2 - 1);
-            // verifica se os pais não são iguais
+            // verifica se os pais nï¿½o sï¿½o iguais
             while (pai1 == pai2) {
                 pai2 = rand() % (tampop / 2 - 1); // Corrigido aqui
             }
@@ -268,25 +268,25 @@ int converterInteiro(string ind) {
     return static_cast<int>(bits.to_ulong());
 }
 
-// converte os filhos da geração para inteiro
+// converte os filhos da geraï¿½ï¿½o para inteiro
 void filhosInt(int filhosint[], string filhosbin[], int numFilhos) {
     for (int i = 0; i < numFilhos; i++) {
         filhosint[i] = converterInteiro(filhosbin[i]);
     }
 }
 
-// faz a mutação
+// faz a mutaï¿½ï¿½o
 void mutacao(string filhosbin[], int numFilhos, double taxademuta) {
     for (int i = 0; i < numFilhos; i++) {
-        // mesmo esquema da taxa de cross, definir se o filho vai ser mutado ou não
+        // mesmo esquema da taxa de cross, definir se o filho vai ser mutado ou nï¿½o
         double testetaxa = (double)rand() / RAND_MAX;
-        // isso gera um int e divide por um valor aleatório gigante, retornando um double entre 0 e 1
+        // isso gera um int e divide por um valor aleatï¿½rio gigante, retornando um double entre 0 e 1
         string filho = filhosbin[i];
-        // compara com a taxa de muta para testar se vai acontecer ou não
+        // compara com a taxa de muta para testar se vai acontecer ou nï¿½o
         if (testetaxa < taxademuta) {
             // vai mutar se o numero aleatorio entre 0 e 1 for maior q a taxa q foi definida
 
-            int preservar = 16; // <--- quantidade de primeiros bits q vão ser poupados da mutação
+            int preservar = 16; // <--- quantidade de primeiros bits q vï¿½o ser poupados da mutaï¿½ï¿½o
             int bitmutado = preservar + (rand() % (32 - preservar)); // vai definir um bit aleatorio pra ser flipado
             if (filho[bitmutado] == '0') {
                 filho[bitmutado] = '1';
@@ -301,9 +301,9 @@ void mutacao(string filhosbin[], int numFilhos, double taxademuta) {
 
 // verificar se achou o perfeito, pra n rodar o loop atoa
 bool perfeito(double qualidade[], int populacao[], int tampop) {
-    // avalia a qualidade dos indivíduos
+    // avalia a qualidade dos indivï¿½duos
     for (int i = 0; i < tampop; i++) {
-        // se achar a solução, retorna ture
+        // se achar a soluï¿½ï¿½o, retorna ture
         if (qualidade[i] == 0) {
             return true;
         }
@@ -315,45 +315,45 @@ bool perfeito(double qualidade[], int populacao[], int tampop) {
 // casos de uso
 
 // CASO 1:
-// tamanho população: 10
-// gerações: 25
+// tamanho populaï¿½ï¿½o: 10
+// geraï¿½ï¿½es: 25
 // crossover: 55
-// mutação: 95
+// mutaï¿½ï¿½o: 95
 // a: 6
 // b: 32
 // c: 61
 // d: 23
 // e: 5
 // f: 1
-// MELHOR INDÍVIDUO: -70
+// MELHOR INDï¿½VIDUO: -70
 
 // CASO 2:
-// tamanho população: 100
-// gerações: 20
+// tamanho populaï¿½ï¿½o: 100
+// geraï¿½ï¿½es: 20
 // crossover: 75
-// mutação: 65
+// mutaï¿½ï¿½o: 65
 // a: 3
 // b: 12
 // c: 42
 // d: 36
 // e: 12
 // f: 8
-// MELHOR INDÍVIDUO: -1
+// MELHOR INDï¿½VIDUO: -1
 
 
-// observações
+// observaï¿½ï¿½es
 
-// o tamanho da população é definido no código, pois estavamos tendo dificuldade ao desenvolver em uma 
-// estrutura que o usuário definia o tamanho.
+// o tamanho da populaï¿½ï¿½o ï¿½ definido no cï¿½digo, pois estavamos tendo dificuldade ao desenvolver em uma 
+// estrutura que o usuï¿½rio definia o tamanho.
 
-// existe também no código, na função de mutação, uma váriavel denominada preservar, o valor inserido nela
-// será o número dos primeiros bits do individuo que não serão submetidos a mutação. Preservando apenas o 
-// primeiro como recomendado em aula estavamos tendo problema com as mutações, podendo ocorrer filhos muito 
+// existe tambï¿½m no cï¿½digo, na funï¿½ï¿½o de mutaï¿½ï¿½o, uma vï¿½riavel denominada preservar, o valor inserido nela
+// serï¿½ o nï¿½mero dos primeiros bits do individuo que nï¿½o serï¿½o submetidos a mutaï¿½ï¿½o. Preservando apenas o 
+// primeiro como recomendado em aula estavamos tendo problema com as mutaï¿½ï¿½es, podendo ocorrer filhos muito 
 // diferentes, o que deixava todo o processo menos eficiente.
 
-// por fim, vale adicionar que estavámos tendo problemas com o VS CODE, pois um dos integrantes teve problemas 
-// para configurá - lo e por consequência, utilizá - lo.Por isso, utilizamos o Visual Studio Community para 
-// desenvolver a maior parte do código, permitindo que todos pudessem estar envolvidos no processo.Ao terminar o 
-// código fizemos testes no VS CODE e resolvemos algumas incompatibilidades, porém temos ciência de que podemos 
-// ter deixado alguma passar despercebida, o que pode ocasionar no mal funcionamento do código quando compilado 
+// por fim, vale adicionar que estavï¿½mos tendo problemas com o VS CODE, pois um dos integrantes teve problemas 
+// para configurï¿½ - lo e por consequï¿½ncia, utilizï¿½ - lo.Por isso, utilizamos o Visual Studio Community para 
+// desenvolver a maior parte do cï¿½digo, permitindo que todos pudessem estar envolvidos no processo.Ao terminar o 
+// cï¿½digo fizemos testes no VS CODE e resolvemos algumas incompatibilidades, porï¿½m temos ciï¿½ncia de que podemos 
+// ter deixado alguma passar despercebida, o que pode ocasionar no mal funcionamento do cï¿½digo quando compilado 
 // e executado no VS CODE.

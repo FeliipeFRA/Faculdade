@@ -10,7 +10,13 @@ using namespace std;
 #define CAPACETE_H
 
 void Cap::pressleft(){
-    cout << leftSlot << endl.
+    cout << leftSlot << endl;
 }
-
+void Cap::pressright(){
+    cout << rightSlot << endl;
+}
+void Cap::Slots(string newLeft, string newRight){
+    leftSlot = newLeft;
+    rightSlot = newRight;
+}
 #endif

@@ -16,6 +16,7 @@ void Cap::pressright(){
     cout << rightSlot << endl;
 }
 void Cap::Slots(string newLeft, string newRight){
+    // sugestão: implementar uma validação antes de guardar
     leftSlot = newLeft;
     rightSlot = newRight;
 }

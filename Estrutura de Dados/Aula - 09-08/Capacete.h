@@ -1,9 +1,11 @@
 // Seção de Definições
-// tipo Nome da classe
+
 #include <string>
 using namespace std;
 
+// declaração de tipo + Nome da classe
 class Cap{
+    // cabeçalhos dos metodos
     // modificador de acesso publico, para que os usuarios consigam utilizar
     public:
         // metodos ou funções

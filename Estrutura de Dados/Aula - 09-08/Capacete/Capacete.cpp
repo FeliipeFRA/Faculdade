@@ -5,7 +5,7 @@
 #include <string>
 using namespace std;
 
-// evitar a repetição da definição do codigo toda vez que der includ
+// evitar a repetição da definição do codigo toda vez que der include
 #ifndef CAPACETE_H
 #define CAPACETE_H
 

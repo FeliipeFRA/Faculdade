@@ -53,5 +53,6 @@ void Stack::Top(int &x){
         cout << "Nao ha elementos no topo" << endl;
         abort();
     }
+    x = entry[top];
 }
 #endif

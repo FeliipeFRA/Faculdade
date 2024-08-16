@@ -4,6 +4,7 @@
 const int MaxStackSize = 100;
 
 class Stack{
+    public:
     //* Metodos */
         // Construtor
         Stack();

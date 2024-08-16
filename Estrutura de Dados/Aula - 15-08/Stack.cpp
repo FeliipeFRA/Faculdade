@@ -3,6 +3,8 @@
 #include <iostream>
 using namespace std;
 
+#ifndef STACK_H
+#define STACK_H
 Stack::Stack(){
     top = 0;
 }
@@ -42,7 +44,7 @@ int Stack::Size(){
     return top;
 }
 
-void Stack::Clear(){`
+void Stack::Clear(){
     top = 0;
 }
 
@@ -52,3 +54,4 @@ void Stack::Top(int &x){
         abort();
     }
 }
+#endif

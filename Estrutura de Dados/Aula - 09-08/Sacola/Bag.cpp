@@ -28,6 +28,21 @@ int Bag::Occurence(int num){
     return occurence;
 }
 
+void Bag::Remove(int num){
+    bool find = false;
+    for (int i = 0; i < Quantity; i++) {
+        if (Nums[i] == num && !find) {
+            find = true;
+        }
+        if (!find && Nums[i] == num) {
+            find = true;
+            Quantity--;
+            Nums[i] = Nums[i+1];
+            i++;
+        };
+    }
+}
+
 bool Bag::Full() {
     if (Quantity == Capacity){
         return true;

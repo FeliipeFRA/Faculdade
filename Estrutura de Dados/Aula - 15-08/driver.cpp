@@ -19,5 +19,15 @@ int main() {
         cout << "- " << x << endl;
     }
 
+    s1.Push(55);
+    s1.Push(33);
+    s1.Push(77);
+
+    s1.Pop(x);
+    cout << "Quantidade de elementos neste momento: " << s1.Size() << endl;
+    s1.Top(x);
+    cout << "O topo da pilha neste momento eh: " << x << endl;
+    cout << "Quantidade de elementos neste momento: " << s1.Size() << endl;
+
     return 0;
 }

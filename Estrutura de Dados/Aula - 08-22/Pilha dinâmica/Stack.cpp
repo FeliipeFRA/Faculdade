@@ -17,6 +17,13 @@ Stack::~Stack(){ // criador
 }
 
 void Stack::Clear(){
+    // StackPointer p;
+    // while(top != NULL) {
+    //      p = top;
+    //      top = top->NextNode;
+    //      delete p;
+    //}
+    
     int x;
     while (!Empty()) {
         Pop(x);

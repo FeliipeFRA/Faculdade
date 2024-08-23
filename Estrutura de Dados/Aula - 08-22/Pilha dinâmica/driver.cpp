@@ -17,12 +17,9 @@ int main() {
 
     cout << "Tamanho da pilha1: " << pilha1.Size() << endl;
     
-    pilha1.Pop(x);
-    pilha1.Pop(x);
-    
-    pilha1.Top(x);
+    pilha1.Clear();
+    cout << "Tamanho da pilha1: " << pilha1.Size() << endl;
 
-    cout << "Topo da pilha: " << x << endl;
 
     return 0;
 }

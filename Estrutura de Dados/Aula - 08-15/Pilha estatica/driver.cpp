@@ -7,12 +7,12 @@ int main() {
     int x;
 
     do{
-        cout << "Informe o numero que deseja dicionar na pilha (!=0) ";
+        cout << "Informe o numero que deseja adicionar na pilha (!=0) ";
         cin >> x;
         s1.Push(x);
     } while (x != 0);
 
-    cout << "A quantidade de elemtnos armazenados na pilha: " << s1.Size() << endl;
+    cout << "A quantidade de elementos armazenados na pilha: " << s1.Size() << endl;
 
     while(!s1.Empty()){
         s1.Pop(x);

@@ -1,6 +1,7 @@
 // Arquivo de implementação da classe
 #include "Queue.h"
 #include <iostream>
+#include <cstdlib>
 using namespace std;
 
 #ifndef QUEUE_H
@@ -13,7 +14,7 @@ Queue::Queue(){ // construtor da classe
 }
 
 Queue::~Queue(){
-    cout << "Fila destruída!" << endl;
+    cout << "Fila destruida!" << endl;
 }
 
 bool Queue::Full(){

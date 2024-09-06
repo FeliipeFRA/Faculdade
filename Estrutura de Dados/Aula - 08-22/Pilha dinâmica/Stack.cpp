@@ -1,6 +1,6 @@
 #include "Stack.h"
 #include <iostream>
-#include <cstdlib>
+#include <cstdlib> // definir abort
 using namespace std;
 
 #ifndef STACK_H

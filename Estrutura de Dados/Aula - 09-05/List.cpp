@@ -1,4 +1,5 @@
 #include "List.h"
+#include <cstdlib>
 #include <iostream>
 using namespace std;
 
@@ -54,6 +55,29 @@ void List::Delete(int &x, int p){
     count --;
 }
 
+int List::Size(){
+    return count;
+}
+
+void List::Clear(){
+    count = 0;
+}
+
+void List::Retrieve(int &x, int p){
+    if (p < 1 || p > count){
+        cout << "Posicao invalida!" << endl;
+        abort();
+    }
+    x = Entry[p];
+}
+
+void List::Replace(int x, int p){
+    if(p < 1 || p > count){
+        cout << "Posicao invalida!" << endl;
+        abort();
+    }
+    Entry[p] = x;
+}
 
 
 #endif

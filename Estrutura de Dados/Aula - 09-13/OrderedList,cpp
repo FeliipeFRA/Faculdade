@@ -1,0 +1,59 @@
+#include "OrderedList.h"
+#include <iostream>
+using namespace std;
+
+#ifndef ORDEREDLIST_H
+#define ORDEREDLIST_H
+
+OrderedList::OrderedList(){
+    sentinel = new ListNode;
+    // IMPORTANTE VERIFICAR SE HA ESPAÇO
+    if(sentinel == NULL){
+        cout << "Memoria insuficiente" << endl;
+        abort();
+    }
+    head = sentinel;
+    count = 0;
+}
+
+OrderedList::~OrderedList(){
+    ListPointer q;
+    while (head != sentinel) { // remove todos os nós exceto o sentinela
+        q = head;
+        head = head->NextNode;
+        delete q;
+    }
+    delete sentinel;
+}
+
+bool OrderedList::Empty(){
+    return head == sentinel;
+}
+
+void OrderedList::Insert(int x){
+    ListPointer p;
+    ListPointer q;
+    sentinel->Entry = x;
+    p = head;
+    while(p->Entry < x){
+        p = p->NextNode; 
+    }
+    q = new ListNode;
+    if(q == NULL) {
+        cout << "Memoria insuficiente" << endl;
+        abort();
+    }
+    if (p == sentinel){
+        sentinel->NextNode = q;
+        sentinel = q;
+    } else {
+        *q = *p;
+        /* q->Entry = p->Entry;
+        q->NextNode = p->NextNode;*/
+        p->Entry = sentinel->Entry;
+        p->NextNode = q;
+    }
+    count ++;
+}
+
+#endif

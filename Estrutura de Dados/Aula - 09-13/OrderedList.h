@@ -7,7 +7,8 @@ class OrderedList{
         void Delete(int x);
         int Size();
         void Clear();
-        void Retrieve(int x, int p);
+        void Search(int x); // return 0 se o elemento não ocorrer na lista
+        // senão ele retorna a posicao da primeira ocorrencia
     private:
         struct ListNode{
             int Entry;
@@ -15,7 +16,6 @@ class OrderedList{
         };
         typedef ListNode* ListPointer;
         int count;
-        ListPointer head;
-        ListPointer sentinel;
+        ListPointer head, sentinel;
 };
 

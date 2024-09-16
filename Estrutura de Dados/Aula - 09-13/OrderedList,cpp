@@ -56,4 +56,28 @@ void OrderedList::Insert(int x){
     count ++;
 }
 
+int OrderedList::Size(){
+    return count;
+}
+
+void OrderedList::Delete(int x){
+    ListPointer p = NULL, q = head;
+    sentinel->Entry = x;
+    while(q->Entry < x) {
+        p = q;
+        q = q->NextNode;
+    }
+    if (q == sentinel || q->Entry != x) {
+        cout << "Elemento nao encontrado!" << endl;
+    } 
+    if (q == head) {
+        head = head->NextNode;
+    }
+    else {
+        p->NextNode = q->NextNode;
+    }
+    delete q;
+    count --;
+}
+
 #endif

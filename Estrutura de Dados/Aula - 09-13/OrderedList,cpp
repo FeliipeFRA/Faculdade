@@ -33,11 +33,14 @@ bool OrderedList::Empty(){
 void OrderedList::Insert(int x){
     ListPointer p;
     ListPointer q;
+
+    // buscar local de inserção
     sentinel->Entry = x;
     p = head;
     while(p->Entry < x){
         p = p->NextNode; 
     }
+
     q = new ListNode;
     if(q == NULL) {
         cout << "Memoria insuficiente" << endl;
@@ -62,14 +65,21 @@ int OrderedList::Size(){
 
 void OrderedList::Delete(int x){
     ListPointer p = NULL, q = head;
+
+    // buscar local de remoção
     sentinel->Entry = x;
     while(q->Entry < x) {
         p = q;
         q = q->NextNode;
     }
+
+    // encontrou x?
     if (q == sentinel || q->Entry != x) {
         cout << "Elemento nao encontrado!" << endl;
-    } 
+        abort();
+    }
+
+    // local de remoção
     if (q == head) {
         head = head->NextNode;
     }

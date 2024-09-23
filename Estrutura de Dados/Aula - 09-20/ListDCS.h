@@ -17,8 +17,8 @@ class OrderedList{
             ListNode* NextNode;
             ListNode* PreviousNode;
             int count;
-        }
-        typedef ListNode* ListPointer;
+        };
+        typedef ListNode *ListPointer;
         ListPointer head;
-        int cont;
+        int count;
 };

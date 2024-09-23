@@ -13,12 +13,17 @@ OrderedList::OrderedList(){
     count = 0;
 }
 
+OrderedList::~OrderedList(){
+
+}
+
 bool OrderedList::Empty(){
     return count == 0;
 }
 
 void OrderedList::Insert(int x){
     ListPointer p, q;
+
     head->Entry = x;
     p = head->NextNode;
 
@@ -26,7 +31,7 @@ void OrderedList::Insert(int x){
         p = p->NextNode;
     }
 
-    if(p != head && p->Entry == x){
+    if(p != head && p->Entry == x){ // 1º caso
         p->count ++;
     } else {
         q = new ListNode;
@@ -34,13 +39,13 @@ void OrderedList::Insert(int x){
             cout << "Memoria insuficente" << endl;
             abort();
         }
-        if(p == head){
+        if(p == head){ // 2º caso - encontra x na sentinela (maior valor da lista)
             q->NextNode = p->NextNode;
             q->PreviousNode = p;
             p->NextNode = q;
             q->NextNode->PreviousNode = q;
             head = q;
-        } else {
+        } else { // 3º caso - encontra o primeiro valor maior que x
             *q = *p;
             p->Entry = x;
             p->NextNode = q;
@@ -50,5 +55,17 @@ void OrderedList::Insert(int x){
         p->count ++;
     };
     count ++;
+
+}
+
+void OrderedList::Delete(int x){
+    ListPointer q;
+
+    q = head->NextNode;
+    head->Entry = x;
+
+    while(q->Entry < x){
+        q = q.NextNode;
+    }
 
 }

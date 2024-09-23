@@ -14,7 +14,15 @@ OrderedList::OrderedList(){
 }
 
 OrderedList::~OrderedList(){
+    ListPointer q;
+    q = head->NextNode;
 
+    while(q != head){
+        if (q->NextNode != head){
+            delete q;
+        }
+    }
+    count = 0;
 }
 
 bool OrderedList::Empty(){
@@ -65,7 +73,35 @@ void OrderedList::Delete(int x){
     head->Entry = x;
 
     while(q->Entry < x){
-        q = q.NextNode;
+        q = q->NextNode;
     }
+    if (q == head){
+        cout << "Elemento nao encontrado" << endl;
+        abort();
+    }
+    if (q->count > 1){
+        q->count --;
+    } else {
+        q->PreviousNode->NextNode = q->NextNode;
+        q->NextNode->PreviousNode = q->PreviousNode;
+        delete q;
+    }
+    count --;
+}
 
+int OrderedList::Search(int x){
+    ListPointer p;
+    int pos = 1;
+    p = head->NextNode;
+    head->Entry = x;
+
+    while(p->Entry < x){
+        p = p->NextNode;
+        pos++;
+    }
+    if (p->Entry != x || p == head){
+        return 0;
+    } else {
+        return pos;
+    }
 }

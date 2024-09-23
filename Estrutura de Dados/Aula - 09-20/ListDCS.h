@@ -10,7 +10,7 @@ class OrderedList{
         void Delete(int x);
         int Size();
         void Clear();
-        int Search();
+        int Search(int x);
     private:
         struct ListNode{
             int Entry;

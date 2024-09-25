@@ -1,5 +1,6 @@
 #include "ListDCS.h"
 #include <iostream>
+#include <cstdlib>
 using namespace std;
 
 OrderedList::OrderedList(){
@@ -11,18 +12,20 @@ OrderedList::OrderedList(){
     head->NextNode = head;
     head->PreviousNode = head;
     count = 0;
+    cout << "Lista criada" << endl;
 }
 
 OrderedList::~OrderedList(){
-    ListPointer q;
-    q = head->NextNode;
-
+    ListPointer q = head->NextNode;
     while(q != head){
-        if (q->NextNode != head){
-            delete q;
-        }
+        ListPointer temp = q->NextNode;
+        delete q;
+        q = temp;
     }
+
+    delete head;
     count = 0;
+    cout << "Lista destruida" << endl;
 }
 
 bool OrderedList::Empty(){
@@ -63,7 +66,7 @@ void OrderedList::Insert(int x){
         p->count ++;
     };
     count ++;
-
+    cout << "Elemento " << x << " inserido com sucesso! " << endl;
 }
 
 void OrderedList::Delete(int x){
@@ -104,4 +107,8 @@ int OrderedList::Search(int x){
     } else {
         return pos;
     }
+}
+
+int OrderedList::Size(){
+    return count;
 }

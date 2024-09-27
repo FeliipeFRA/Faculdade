@@ -16,22 +16,37 @@ OrderedList::OrderedList(){
 }
 
 OrderedList::~OrderedList(){
-    ListPointer q = head->NextNode;
-    while(q != head){
-        ListPointer temp = q->NextNode;
-        delete q;
-        q = temp;
-    }
+    ListPointer p, q;
 
+    ListPointer p = head->NextNode;
+    while(q != head){
+        q = p;
+        p = p->NextNode;
+        delete q;
+    }
     delete head;
-    count = 0;
     cout << "Lista destruida" << endl;
+}
+
+void OrderedList::Clear(){
+    ListPointer p, q;
+    p = head->NextNode;
+    while(p != head){
+        q = p;
+        p = p->NextNode;
+        delete q;
+    }
+    head->NextNode = head;
+    head->PreviousNode = head;
+    count = 0;
 }
 
 bool OrderedList::Empty(){
     return count == 0;
 }
 
+// 1 versao
+/*
 void OrderedList::Insert(int x){
     ListPointer p, q;
 
@@ -68,6 +83,38 @@ void OrderedList::Insert(int x){
     count ++;
     cout << "Elemento " << x << " inserido com sucesso! " << endl;
 }
+*/
+
+// 2 versao
+void OrderedList::Insert(int x){
+    ListPointer p, q;
+
+    head->Entry = x;
+    p = head->NextNode;
+
+    while(p->Entry < x){
+        p = p->NextNode;
+    }
+
+    if(p != head && p->Entry == x){ // 1º caso
+        p->count ++;
+    } else {
+        q = new ListNode;
+        if(q == NULL){
+            cout << "Memoria insuficente" << endl;
+            abort();
+        }
+        q->Entry = x;
+        q->count = 1;
+        q->NextNode = p;
+        q->PreviousNode = p->PreviousNode;
+        p->PreviousNode->NextNode = q;
+        p->PreviousNode = q;
+    };
+    count ++;
+    cout << "Elemento " << x << " inserido com sucesso! " << endl;
+}
+
 
 void OrderedList::Delete(int x){
     ListPointer q;

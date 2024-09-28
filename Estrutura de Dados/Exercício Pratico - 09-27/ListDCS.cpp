@@ -112,7 +112,6 @@ void OrderedList::Insert(int x){
         p->PreviousNode = q;
     };
     count ++;
-    cout << "Elemento " << x << " inserido com sucesso! " << endl;
 }
 
 void OrderedList::Delete(int x){
@@ -131,7 +130,6 @@ void OrderedList::Delete(int x){
     if (q->count > 1){
         q->count --;
     } else {
-        cout << "Elemento " << q->Entry << " removido com sucesso" << endl;
         q->PreviousNode->NextNode = q->NextNode;
         q->NextNode->PreviousNode = q->PreviousNode;
         delete q;

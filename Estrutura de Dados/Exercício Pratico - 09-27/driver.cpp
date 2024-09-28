@@ -25,14 +25,8 @@ int main(){
     cout << "Tamanho da lista 1: " << l1.Size() << endl;
     l2.PrintList();
     cout << "Tamanho da lista 2: " << l2.Size() << endl;
-    cout << "------------------------" << endl;  
-
-    l1.PrintList();
-    cout << "Tamanho da lista 1: " << l1.Size() << endl;
-    l2.PrintList();
-    cout << "Tamanho da lista 2: " << l2.Size() << endl;
-    cout << "------------------------" << endl; 
-    l1.BreakList(1, l2);
+    cout << "------------------------" << endl;   
+    l1.BreakList(4, l2);
 
     l1.PrintList();
     cout << "Tamanho da lista 1: " << l1.Size() << endl;

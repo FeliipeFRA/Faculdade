@@ -16,7 +16,7 @@ OrderedList::OrderedList(){
 }
 
 OrderedList::~OrderedList(){
-    ListPointer p, q;
+    ListPointer q;
 
     ListPointer p = head->NextNode;
     while(q != head){
@@ -112,9 +112,7 @@ void OrderedList::Insert(int x){
         p->PreviousNode = q;
     };
     count ++;
-    cout << "Elemento " << x << " inserido com sucesso! " << endl;
 }
-
 
 void OrderedList::Delete(int x){
     ListPointer q;
@@ -158,4 +156,51 @@ int OrderedList::Search(int x){
 
 int OrderedList::Size(){
     return count;
+}
+
+void OrderedList::BreakList(int pos, OrderedList &newList){
+    if (!newList.Empty()){
+        cout << "Segunda lista passada como argumento nao esta vazia!" << endl;
+        abort();
+    }
+    if(pos < 1 || pos > count + 1){
+        cout << "Posicao invalida passada como argumento!" << endl;
+        abort();
+    }
+
+    ListPointer ponteiro, q;
+
+    SetPosition(pos, ponteiro);
+
+    while(ponteiro != head){
+        int vezes = 0;
+        for (int i = 1; i <= ponteiro->count; i++){
+            vezes++;
+            newList.Insert(ponteiro->Entry);
+        }
+        q = ponteiro;
+        ponteiro = ponteiro->NextNode;
+        for (int i = 0; i < vezes; i++){
+            Delete(q->Entry);
+        }
+    }
+}
+
+void OrderedList::SetPosition(int pos, ListPointer &current){
+    current = head;
+    for(int i = 1; i <= pos; i++){
+        current = current->NextNode;
+    }
+}
+
+void OrderedList::PrintList(){
+    ListPointer p;
+    cout << "Lista: ";
+    // achar a posicao e parar o ponteiro p
+    p = head->NextNode;
+    while(p != head){
+        cout << p->Entry << "[" << p->count << "]  ";
+        p = p->NextNode;
+    }
+    cout << "\n";
 }

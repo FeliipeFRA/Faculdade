@@ -31,7 +31,6 @@ void List::Insert(int x, int p){
         cout << "Posicao invalida!" << endl;
         abort();
     }
-    count++;
     for(int i = count; i >= p; i--){
         Entry [i + 1] = Entry[i];
     }

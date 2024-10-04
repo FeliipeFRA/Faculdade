@@ -1,25 +1,11 @@
 class Cilinder{
     public:
         Cilinder(float h, float r);
-
         ~Cilinder();
-
-        float Height(){
-            return height;
-        }
-
-        float Radius(){
-            return radius;
-        }
-
-        float Area(){
-            return area;
-        }
-
-        float Volume(){
-            return volume;
-        }
-
+        float Height();
+        float Radius();
+        float Area();
+        float Volume();
     private:
         float height;
         float radius;

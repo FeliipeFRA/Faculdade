@@ -26,6 +26,11 @@ int main(){
             cin >> n;
             arvore1.Insert(arvore1.root, n);
             break;
+        case '2':
+            cout << "--------------------------" << endl;
+            cout << "   IMPRESSAO CRESCENTE" << endl;
+            arvore1.PrintRoot(arvore1.root);
+            break;
         case '6':
             fim = true;
             break;

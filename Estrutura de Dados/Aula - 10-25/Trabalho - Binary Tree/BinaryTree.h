@@ -4,13 +4,14 @@ class BinaryTree{
             int Entry;
             TreeNode* LeftNode;
             TreeNode* RightNode;
-            int count = 0;
+            int occur = 0;
         };
         typedef TreeNode *TreePointer;        
-        int count;
+        int count = 0;
     public:
-        TreePointer root = NULL;
+        TreePointer root;
         BinaryTree();
         ~BinaryTree();
-        void Insert(TreePointer raiz, int n);    
+        void Insert(TreePointer &raiz, int n);
+        void PrintRoot(TreePointer &raiz);
 };

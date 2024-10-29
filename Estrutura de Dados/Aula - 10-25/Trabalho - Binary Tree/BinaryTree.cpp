@@ -29,6 +29,11 @@ void BinaryTree::Insert(TreePointer &raiz, int n){
     }
 }
 
-void BinaryTree::PrintRoot(TreePointer &raiz){
-    cout << raiz->Entry << endl;
+void BinaryTree::PrintTree(TreePointer &raiz){
+    if (raiz == nullptr){
+        return;
+    };
+    PrintTree(raiz->RightNode);
+    cout << raiz->Entry;
+    PrintTree(raiz->LeftNode);
 }

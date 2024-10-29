@@ -29,7 +29,7 @@ int main(){
         case '2':
             cout << "--------------------------" << endl;
             cout << "   IMPRESSAO CRESCENTE" << endl;
-            arvore1.PrintRoot(arvore1.root);
+            arvore1.PrintTree(arvore1.root);
             break;
         case '6':
             fim = true;

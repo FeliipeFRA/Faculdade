@@ -13,5 +13,5 @@ class BinaryTree{
         BinaryTree();
         ~BinaryTree();
         void Insert(TreePointer &raiz, int n);
-        void PrintRoot(TreePointer &raiz);
+        void PrintTree(TreePointer &raiz);
 };

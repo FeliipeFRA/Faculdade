@@ -22,14 +22,42 @@ int main(){
         {
         case '1':
             int n;
-            cout << "Numero a ser inserido: " << endl;
+            cout << "Numero a ser inserido: ";
             cin >> n;
             arvore1.Insert(arvore1.root, n);
             break;
         case '2':
             cout << "--------------------------" << endl;
             cout << "   IMPRESSAO CRESCENTE" << endl;
-            arvore1.PrintTree(arvore1.root);
+            arvore1.CrescentPrintTree(arvore1.root);
+            break;
+        case '3':
+            cout << "--------------------------" << endl;
+            cout << "   IMPRESSAO DECRESCENTE" << endl;
+            arvore1.DecrescentPrintTree(arvore1.root);
+            break;
+        case '4':
+            cout << "--------------------------" << endl;
+            cout << "       BUSCAR VALOR" << endl;
+            int num;
+            cout << "Numero a ser procurado: ";
+            cin >> num;
+            if (arvore1.SearchValue(arvore1.root, num)){
+                cout << "O numero " << num << " existe na arvore" << endl;
+            } else {
+                cout << "O numero " << num << " NAO existe na arvore" << endl;
+            }
+            break;
+        case '5':
+            cout << "--------------------------" << endl;
+            cout << "   OCORRENCIA DE VALOR" << endl;
+            cout << "Numero a ser procurado: ";
+            cin >> num;
+            if (arvore1.SearchValue(arvore1.root, num)){
+                cout << "O numero " << num << " ocorre " << arvore1.ValueOccur(arvore1.root, num) << " vezes na arvore" << endl;
+            } else {
+                cout << "O numero " << num << " NAO existe na arvore" << endl;
+            }
             break;
         case '6':
             fim = true;

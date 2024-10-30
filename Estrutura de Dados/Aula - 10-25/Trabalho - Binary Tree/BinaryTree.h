@@ -4,14 +4,18 @@ class BinaryTree{
             int Entry;
             TreeNode* LeftNode;
             TreeNode* RightNode;
-            int occur = 0;
+            int occur;
         };
         typedef TreeNode *TreePointer;        
-        int count = 0;
+        int count;
     public:
         TreePointer root;
         BinaryTree();
         ~BinaryTree();
         void Insert(TreePointer &raiz, int n);
-        void PrintTree(TreePointer &raiz);
+        void CrescentPrintTree(TreePointer &raiz);
+        void DecrescentPrintTree(TreePointer &raiz);
+        bool SearchValue(TreePointer &raiz, int n);
+        int ValueOccur(TreePointer &raiz, int n);
+        bool Empty();
 };

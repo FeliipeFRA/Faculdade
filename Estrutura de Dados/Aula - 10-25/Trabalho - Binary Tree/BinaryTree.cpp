@@ -5,6 +5,7 @@ using namespace std;
 
 BinaryTree::BinaryTree(){
     count = 0;
+    height = 1;
     root = NULL;
 }
 
@@ -13,27 +14,35 @@ BinaryTree::~BinaryTree(){
 }
 
 void BinaryTree::Insert(TreePointer &raiz, int n){
-    // criar nó
+    // criar nó - PERGUNTAR SOBRE REPETIÇÃO DE NEW
     TreePointer NewNode = new TreeNode;
     NewNode->Entry = n;
     NewNode->LeftNode = NULL;
     NewNode->RightNode = NULL;
-    NewNode->occur = 0;
+    NewNode->occur = 1;
+    NewNode->level = 0;
 
-    // atualizar contadores
-    count ++;
-    NewNode->occur ++;
 
     // lógica recursiva
     if (raiz == NULL){
         raiz = NewNode;
+        count ++;
     } else {
         if (NewNode->Entry < raiz->Entry){
             Insert(raiz->LeftNode, n);
+            raiz->LeftNode->level = raiz->level + 1;
+            if (raiz->LeftNode->level >= height) {
+                height = raiz->LeftNode->level + 1;
+            }
         } else if (NewNode->Entry == raiz->Entry){
             raiz->occur ++;
+            count ++;
         } else {
             Insert(raiz->RightNode, n);
+            raiz->RightNode->level = raiz->level + 1;
+            if (raiz->RightNode->level >= height) {
+                height = raiz->RightNode->level + 1;
+            }
         }
     }
 }
@@ -48,7 +57,7 @@ void BinaryTree::CrescentPrintTree(TreePointer &raiz){
         return;
     } else {
         CrescentPrintTree(raiz->LeftNode);
-        cout << raiz->Entry << " [" << raiz->occur << "]" << endl;
+        cout << raiz->Entry << " [" << raiz->occur << "] - Nivel: " << raiz->level << endl;
         CrescentPrintTree(raiz->RightNode);
     }
 }
@@ -98,6 +107,18 @@ int BinaryTree::ValueOccur(TreePointer &raiz, int n){
             SearchValue(raiz->LeftNode, n);
         }
     }
+}
+
+int BinaryTree::TreeSize(TreePointer &raiz){
+    return count;
+}
+
+int BinaryTree::TreeHeight(TreePointer &raiz){
+    return height;
+}
+
+int BinaryTree::TreeRoot(TreePointer &raiz){
+    return raiz->Entry;
 }
 
 bool BinaryTree::Empty(){

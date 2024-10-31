@@ -5,6 +5,8 @@
 using namespace std;
 
 // g++ driver.cpp BinaryTree.cpp -o driver.exe
+// REPETIÇÃO NEW (!?) - NewNode sendo criado repetidas vezes, compensa passar um nó como parametro?
+
 
 int main(){
     BinaryTree arvore1;
@@ -13,9 +15,9 @@ int main(){
     {
         char op;       
         cout << "--------------------------" << endl;
-        cout << "BINARY TREE" << endl;
+        cout << "       BINARY TREE" << endl;
         cout << "--------------------------" << endl;
-        cout << "[1] - Inserir Item\n[2] - Impressao Crescente\n[3] - Impressao Decrescente\n[4] - Buscar Valor\n[5] - Ocorrencia de um valor\n[6] - Finalizar Programa" << endl;
+        cout << "[1] - Inserir Item\n[2] - Impressao Crescente\n[3] - Impressao Decrescente\n[4] - Buscar Valor\n[5] - Ocorrencia de um valor\n[6] - Tamanho da arvore\n[7] - Altura da arvore\n[8] - Raiz da arvore\n[9] - Finalizar Programa" << endl;
         cout << "Opcao ---> ";
         cin >> op;
         switch (op)
@@ -60,6 +62,33 @@ int main(){
             }
             break;
         case '6':
+            cout << "--------------------------" << endl;
+            if (arvore1.Empty()){
+                cout << "ARVORE VAZIA!" << endl;
+            } else {
+                cout << "    TAMANHO DA ARVORE" << endl;
+                cout << "A quantidade de itens na arvore eh: " << arvore1.TreeSize(arvore1.root) << endl;
+            }
+            break;
+        case '7':
+            cout << "--------------------------" << endl;
+            if (arvore1.Empty()){
+                cout << "ARVORE VAZIA!" << endl;
+            } else {
+            cout << "    ALTURA DA ARVORE" << endl;
+            cout << "A altura da arvore eh: " << arvore1.TreeHeight(arvore1.root) << endl;
+            }
+            break;
+        case '8':
+            cout << "--------------------------" << endl;
+            if (arvore1.Empty()){
+                cout << "ARVORE VAZIA!" << endl;
+            } else {
+            cout << "      RAIZ DA ARVORE" << endl;
+            cout << "A raiz da arvore eh: " << arvore1.TreeRoot(arvore1.root) << endl;
+            }
+            break;
+        case '9':
             fim = true;
             break;
         default:

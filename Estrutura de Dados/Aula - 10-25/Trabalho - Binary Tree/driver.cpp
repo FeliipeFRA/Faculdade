@@ -7,7 +7,6 @@ using namespace std;
 // g++ driver.cpp BinaryTree.cpp -o driver.exe
 // REPETIÇÃO NEW (!?) - NewNode sendo criado repetidas vezes, compensa passar um nó como parametro?
 
-
 int main(){
     BinaryTree arvore1;
     bool fim = false;
@@ -17,7 +16,7 @@ int main(){
         cout << "--------------------------" << endl;
         cout << "       BINARY TREE" << endl;
         cout << "--------------------------" << endl;
-        cout << "[1] - Inserir Item\n[2] - Impressao Crescente\n[3] - Impressao Decrescente\n[4] - Buscar Valor\n[5] - Ocorrencia de um valor\n[6] - Tamanho da arvore\n[7] - Altura da arvore\n[8] - Raiz da arvore\n[9] - Finalizar Programa" << endl;
+        cout << "[1] - Inserir Item\n[2] - Impressao Crescente\n[3] - Impressao Decrescente\n[4] - Buscar Valor\n[5] - Ocorrencia de um valor\n[6] - Tamanho da arvore\n[7] - Altura da arvore\n[8] - Raiz da arvore\n[9] - Remover numero\n[10] - Finalizar Programa" << endl;
         cout << "Opcao ---> ";
         cin >> op;
         switch (op)
@@ -75,7 +74,6 @@ int main(){
             if (arvore1.Empty()){
                 cout << "ARVORE VAZIA!" << endl;
             } else {
-            cout << "    ALTURA DA ARVORE" << endl;
             cout << "A altura da arvore eh: " << arvore1.TreeHeight(arvore1.root) << endl;
             }
             break;
@@ -89,6 +87,14 @@ int main(){
             }
             break;
         case '9':
+            cout << "--------------------------" << endl;
+            if (arvore1.Empty()){
+                cout << "ARVORE VAZIA!" << endl;
+            } else {
+            cout << "Numero a ser removido: " << endl;
+            }
+            break;
+        case '10':
             fim = true;
             break;
         default:

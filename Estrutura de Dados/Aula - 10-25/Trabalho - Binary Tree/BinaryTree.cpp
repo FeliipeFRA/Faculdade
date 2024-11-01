@@ -14,27 +14,25 @@ BinaryTree::~BinaryTree(){
 }
 
 void BinaryTree::Insert(TreePointer &raiz, int n){
-    // criar nó - PERGUNTAR SOBRE REPETIÇÃO DE NEW
-    TreePointer NewNode = new TreeNode;
-    NewNode->Entry = n;
-    NewNode->LeftNode = NULL;
-    NewNode->RightNode = NULL;
-    NewNode->occur = 1;
-    NewNode->level = 0;
-
-
     // lógica recursiva
     if (raiz == NULL){
+        // criar nó
+        TreePointer NewNode = new TreeNode;
+        NewNode->Entry = n;
+        NewNode->LeftNode = NULL;
+        NewNode->RightNode = NULL;
+        NewNode->occur = 1;
+        NewNode->level = 0;
         raiz = NewNode;
         count ++;
     } else {
-        if (NewNode->Entry < raiz->Entry){
+        if (n < raiz->Entry){
             Insert(raiz->LeftNode, n);
             raiz->LeftNode->level = raiz->level + 1;
             if (raiz->LeftNode->level >= height) {
                 height = raiz->LeftNode->level + 1;
             }
-        } else if (NewNode->Entry == raiz->Entry){
+        } else if (n == raiz->Entry){
             raiz->occur ++;
             count ++;
         } else {

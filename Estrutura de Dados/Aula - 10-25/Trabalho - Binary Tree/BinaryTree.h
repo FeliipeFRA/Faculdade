@@ -15,6 +15,7 @@ class BinaryTree{
         BinaryTree();
         ~BinaryTree();
         void Insert(TreePointer &raiz, int n);
+        void Remove(TreePointer &raiz, int n);
         void CrescentPrintTree(TreePointer &raiz);
         void DecrescentPrintTree(TreePointer &raiz);
         bool SearchValue(TreePointer &raiz, int n);

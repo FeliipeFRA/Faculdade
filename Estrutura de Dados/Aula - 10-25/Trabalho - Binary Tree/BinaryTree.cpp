@@ -45,6 +45,23 @@ void BinaryTree::Insert(TreePointer &raiz, int n){
     }
 }
 
+void BinaryTree::Remove(TreePointer &raiz, int n){
+    if (SearchValue(raiz, n)){
+        TreePointer p = raiz;
+        if (raiz->Entry == n){
+            
+        } else {
+            if (n < raiz->Entry){
+                Remove(raiz->LeftNode, n);
+            } else {
+                Remove(raiz->RightNode, n);
+            }
+        };
+    } else {
+        cout << "O numero " << n << " NAO existe na arvore" << endl;
+    }
+}
+
 void BinaryTree::CrescentPrintTree(TreePointer &raiz){
     if (Empty()){
         cout << "ARVORE VAZIA!" << endl;

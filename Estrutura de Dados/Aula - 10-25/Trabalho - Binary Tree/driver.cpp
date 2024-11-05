@@ -5,7 +5,6 @@
 using namespace std;
 
 // g++ driver.cpp BinaryTree.cpp -o driver.exe
-// REPETIÇÃO NEW (!?) - NewNode sendo criado repetidas vezes, compensa passar um nó como parametro?
 
 int main()
 {
@@ -26,7 +25,7 @@ int main()
         cout << "--------------------------" << endl;
         cout << "       BINARY TREE" << endl;
         cout << "--------------------------" << endl;
-        cout << "[1] - Inserir Item\n[2] - Impressao Crescente\n[3] - Impressao Decrescente\n[4] - Buscar Valor\n[5] - Ocorrencia de um valor\n[6] - Tamanho da arvore\n[7] - Altura da arvore\n[8] - Raiz da arvore\n[9] - Remover numero\n[10] - Finalizar Programa" << endl;
+        cout << "[1] - Inserir Item\n[2] - Impressao Crescente\n[3] - Impressao Decrescente\n[4] - Buscar Valor\n[5] - Ocorrencia de um valor\n[6] - Tamanho da arvore\n[7] - Raiz da arvore\n[8] - Remover numero\n[9] - Finalizar Programa" << endl;
         cout << "Opcao ---> ";
         cin >> op;
         switch (op)
@@ -63,18 +62,25 @@ int main()
             }
             break;
         case 5:
+        
             cout << "--------------------------" << endl;
-            cout << "   OCORRENCIA DE VALOR" << endl;
-            cout << "Numero a ser procurado: ";
-            cin >> num;
-            if (arvore1.SearchValue(arvore1.root, num))
+            if (arvore1.Empty())
             {
-                cout << "O numero " << num << " ocorre " << arvore1.ValueOccur(arvore1.root, num) << " vezes na arvore" << endl;
+                cout << "ARVORE VAZIA!" << endl;
+            } else {
+                cout << "   OCORRENCIA DE VALOR" << endl;
+                cout << "Numero a ser procurado: ";
+                cin >> num;
+                if (arvore1.SearchValue(arvore1.root, num))
+                {
+                    cout << "O numero " << num << " ocorre " << arvore1.ValueOccur(arvore1.root, num) << " vezes na arvore" << endl;
+                }
+                else
+                {
+                    cout << "O numero " << num << " NAO existe na arvore" << endl;
+                }
             }
-            else
-            {
-                cout << "O numero " << num << " NAO existe na arvore" << endl;
-            }
+        
             break;
         case 6:
             cout << "--------------------------" << endl;
@@ -96,22 +102,11 @@ int main()
             }
             else
             {
-                cout << "A altura da arvore eh: " << arvore1.TreeHeight(arvore1.root) << endl;
-            }
-            break;
-        case 8:
-            cout << "--------------------------" << endl;
-            if (arvore1.Empty())
-            {
-                cout << "ARVORE VAZIA!" << endl;
-            }
-            else
-            {
                 cout << "      RAIZ DA ARVORE" << endl;
                 cout << "A raiz da arvore eh: " << arvore1.TreeRoot(arvore1.root) << endl;
             }
             break;
-        case 9:
+        case 8:
             cout << "--------------------------" << endl;
             if (arvore1.Empty())
             {
@@ -130,7 +125,7 @@ int main()
                     cout << "O numero " << num << " NAO existe na arvore" << endl;
                 }
                 break;
-            case 10:
+            case 9:
                 fim = true;
                 break;
             default:

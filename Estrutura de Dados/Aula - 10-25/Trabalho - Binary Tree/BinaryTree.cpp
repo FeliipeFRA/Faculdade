@@ -6,7 +6,6 @@ using namespace std;
 BinaryTree::BinaryTree()
 {
     count = 0;
-    height = 1;
     root = NULL;
 }
 
@@ -25,7 +24,6 @@ void BinaryTree::Insert(TreePointer &raiz, int n)
         NewNode->LeftNode = NULL;
         NewNode->RightNode = NULL;
         NewNode->occur = 1;
-        NewNode->level = 0;
         raiz = NewNode;
         count++;
     }
@@ -34,11 +32,6 @@ void BinaryTree::Insert(TreePointer &raiz, int n)
         if (n < raiz->Entry)
         {
             Insert(raiz->LeftNode, n);
-            raiz->LeftNode->level = raiz->level + 1;
-            if (raiz->LeftNode->level >= height)
-            {
-                height = raiz->LeftNode->level + 1;
-            }
         }
         else if (n == raiz->Entry)
         {
@@ -48,11 +41,6 @@ void BinaryTree::Insert(TreePointer &raiz, int n)
         else
         {
             Insert(raiz->RightNode, n);
-            raiz->RightNode->level = raiz->level + 1;
-            if (raiz->RightNode->level >= height)
-            {
-                height = raiz->RightNode->level + 1;
-            }
         }
     }
 }
@@ -62,11 +50,29 @@ void BinaryTree::Remove(TreePointer &raiz, int n)
     TreePointer p = raiz;
     if (n == raiz->Entry)
     {
-        if (raiz->LeftNode == NULL && raiz->RightNode == NULL){
-            p == NULL;
-            delete raiz;
+        if (raiz->LeftNode == NULL && raiz->RightNode == NULL)
+        {                         // CASO 1-)
+            count -= raiz->occur; // remover do count o numero de ocorrencias do no
+            delete p;             // deleta o nó
+            raiz = NULL;          // aponta raiz pra null, assim left/right node ira pra nulo
             cout << "Numero " << n << " deletado da arvore com sucesso!" << endl;
-        } else {
+        }
+        else if (raiz->LeftNode == NULL && raiz->RightNode != NULL || raiz->LeftNode != NULL && raiz->RightNode == NULL)
+        {
+            count -= raiz->occur;         // CASO 2-)
+            if (raiz->LeftNode == NULL) { //apontamento do nó filho
+                raiz = raiz->RightNode;
+            } else {
+                raiz = raiz->LeftNode;
+            }
+            delete p;
+            cout << "Numero " << n << " (1 filho) deletado da arvore com sucesso!" << endl;
+        }
+        else if () {
+            
+        }
+        else
+        {
             cout << "NAO E POSSIVEL REMOVER ESSE NUMERO" << endl;
         }
     }
@@ -97,7 +103,7 @@ void BinaryTree::CrescentPrintTree(TreePointer &raiz)
     else
     {
         CrescentPrintTree(raiz->LeftNode);
-        cout << raiz->Entry << " [" << raiz->occur << "] - Nivel: " << raiz->level << endl;
+        cout << raiz->Entry << " [" << raiz->occur << "]" << endl;
         CrescentPrintTree(raiz->RightNode);
     }
 }
@@ -116,7 +122,7 @@ void BinaryTree::DecrescentPrintTree(TreePointer &raiz)
     else
     {
         DecrescentPrintTree(raiz->RightNode);
-        cout << raiz->Entry << " [" << raiz->occur << "] - Nivel: " << raiz->level << endl;
+        cout << raiz->Entry << " [" << raiz->occur << "]" << endl;
         DecrescentPrintTree(raiz->LeftNode);
     }
 }
@@ -171,11 +177,6 @@ int BinaryTree::ValueOccur(TreePointer &raiz, int n)
 int BinaryTree::TreeSize(TreePointer &raiz)
 {
     return count;
-}
-
-int BinaryTree::TreeHeight(TreePointer &raiz)
-{
-    return height;
 }
 
 int BinaryTree::TreeRoot(TreePointer &raiz)

@@ -5,11 +5,9 @@ class BinaryTree{
             TreeNode* LeftNode;
             TreeNode* RightNode;
             int occur;
-            int level;
         };
         typedef TreeNode *TreePointer;        
         int count;
-        int height;
     public:
         TreePointer root;
         BinaryTree();
@@ -21,7 +19,6 @@ class BinaryTree{
         bool SearchValue(TreePointer &raiz, int n);
         int ValueOccur(TreePointer &raiz, int n);
         int TreeSize(TreePointer &raiz);
-        int TreeHeight(TreePointer &raiz);
         int TreeRoot(TreePointer &raiz);
         bool Empty();
 };

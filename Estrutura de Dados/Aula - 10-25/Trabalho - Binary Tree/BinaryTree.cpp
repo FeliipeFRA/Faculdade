@@ -57,7 +57,7 @@ void BinaryTree::Remove(TreePointer &raiz, int n)
             raiz = NULL;          // aponta raiz pra null, assim left/right node ira pra nulo
             cout << "Numero " << n << " deletado da arvore com sucesso!" << endl;
         }
-        else if (raiz->LeftNode == NULL && raiz->RightNode != NULL || raiz->LeftNode != NULL && raiz->RightNode == NULL)
+        else if ((raiz->LeftNode == NULL && raiz->RightNode != NULL) || (raiz->LeftNode != NULL && raiz->RightNode == NULL))
         {
             count -= raiz->occur;         // CASO 2-)
             if (raiz->LeftNode == NULL) { //apontamento do nó filho
@@ -68,8 +68,10 @@ void BinaryTree::Remove(TreePointer &raiz, int n)
             delete p;
             cout << "Numero " << n << " (1 filho) deletado da arvore com sucesso!" << endl;
         }
-        else if () {
-            
+        else if ((raiz->LeftNode != NULL && raiz->RightNode != NULL)) { // 2 filhos
+            if ((raiz->LeftNode->LeftNode == NULL && raiz->LeftNode->RightNode == NULL) || (raiz->RightNode->LeftNode == NULL && raiz->LeftNode->RightNode == NULL)){
+
+            }
         }
         else
         {

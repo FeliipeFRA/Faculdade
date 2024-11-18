@@ -17,6 +17,7 @@ class BinaryTree{
         void CrescentPrintTree(TreePointer &raiz);
         void DecrescentPrintTree(TreePointer &raiz);
         bool SearchValue(TreePointer &raiz, int n);
+        int FindMin(TreePointer &raiz);
         int ValueOccur(TreePointer &raiz, int n);
         int TreeSize(TreePointer &raiz);
         int TreeRoot(TreePointer &raiz);

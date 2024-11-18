@@ -16,9 +16,13 @@ int main()
         arvore1.Insert(arvore1.root, 400);
         arvore1.Insert(arvore1.root, 600);
         arvore1.Insert(arvore1.root, 450);
+        arvore1.Insert(arvore1.root, 440);
+        arvore1.Insert(arvore1.root, 480);
+        arvore1.Insert(arvore1.root, 460);
+        arvore1.Insert(arvore1.root, 490);
+        arvore1.Insert(arvore1.root, 470);
         arvore1.Insert(arvore1.root, 300);
         arvore1.Insert(arvore1.root, 700);
-
     while (!fim)
     {   
         short int op;

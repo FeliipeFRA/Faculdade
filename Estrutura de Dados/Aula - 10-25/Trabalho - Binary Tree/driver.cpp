@@ -11,20 +11,8 @@ int main()
     BinaryTree arvore1;
     bool fim = false;
 
-    // TESTE
-        arvore1.Insert(arvore1.root, 500);
-        arvore1.Insert(arvore1.root, 400);
-        arvore1.Insert(arvore1.root, 600);
-        arvore1.Insert(arvore1.root, 450);
-        arvore1.Insert(arvore1.root, 440);
-        arvore1.Insert(arvore1.root, 480);
-        arvore1.Insert(arvore1.root, 460);
-        arvore1.Insert(arvore1.root, 490);
-        arvore1.Insert(arvore1.root, 470);
-        arvore1.Insert(arvore1.root, 300);
-        arvore1.Insert(arvore1.root, 700);
     while (!fim)
-    {   
+    {
         short int op;
         cout << "--------------------------" << endl;
         cout << "       BINARY TREE" << endl;
@@ -66,12 +54,14 @@ int main()
             }
             break;
         case 5:
-        
+
             cout << "--------------------------" << endl;
             if (arvore1.Empty())
             {
                 cout << "ARVORE VAZIA!" << endl;
-            } else {
+            }
+            else
+            {
                 cout << "   OCORRENCIA DE VALOR" << endl;
                 cout << "Numero a ser procurado: ";
                 cin >> num;
@@ -84,7 +74,7 @@ int main()
                     cout << "O numero " << num << " NAO existe na arvore" << endl;
                 }
             }
-        
+
             break;
         case 6:
             cout << "--------------------------" << endl;

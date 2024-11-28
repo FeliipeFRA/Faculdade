@@ -77,18 +77,18 @@ void AVL::BalanceTree(TreePointer &raiz) {
     raiz->BalanceFactor = SetBalanceFactor(raiz);
 
     if (raiz->BalanceFactor > 1 && SetBalanceFactor(raiz->LeftNode) >= 0) {
-        SimpleRightRotation(raiz);
+        SimpleRightRotation(raiz); // CASO 1-) SIMPLES
     }
     else if (raiz->BalanceFactor < -1 && SetBalanceFactor(raiz->RightNode) <= 0) {
-        SimpleLeftRotation(raiz);
+        SimpleLeftRotation(raiz); // CASO 2-) SIMPLES
     }
     else if (raiz->BalanceFactor > 1 && SetBalanceFactor(raiz->LeftNode) < 0) {
         SimpleLeftRotation(raiz->LeftNode); 
-        SimpleRightRotation(raiz);         
+        SimpleRightRotation(raiz); // CASO 3-) DUPLA         
     }
     else if (raiz->BalanceFactor < -1 && SetBalanceFactor(raiz->RightNode) > 0) {
         SimpleRightRotation(raiz->RightNode); 
-        SimpleLeftRotation(raiz);            
+        SimpleLeftRotation(raiz); // CASO 4-) DUPLA
     }
 }
 

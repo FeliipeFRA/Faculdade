@@ -3,21 +3,17 @@
 #include <cstdlib>
 using namespace std;
 
-AVL::AVL()
-{
+AVL::AVL() {
     count = 0;
     root = NULL;
 }
 
-AVL::~AVL()
-{
+AVL::~AVL() {
+    ClearTree(root);
 }
 
-void AVL::Insert(TreePointer &raiz, int n)
-{
-    // lógica recursiva
+void AVL::Insert(TreePointer &raiz, int n) {
     if (raiz == NULL) {
-        // criar nó
         TreePointer NewNode = new TreeNode;
         NewNode->Entry = n;
         NewNode->LeftNode = NULL;
@@ -26,8 +22,7 @@ void AVL::Insert(TreePointer &raiz, int n)
         NewNode->BalanceFactor = 0;
         raiz = NewNode;
         count++;
-    }
-    else if (n < raiz->Entry) Insert(raiz->LeftNode, n);
+    } else if (n < raiz->Entry) Insert(raiz->LeftNode, n);
     else if (n > raiz->Entry) Insert(raiz->RightNode, n);
     else {
         raiz->occur++;
@@ -37,21 +32,17 @@ void AVL::Insert(TreePointer &raiz, int n)
     BalanceTree(raiz);
 }
 
-int AVL::SetBalanceFactor(TreePointer &raiz){
- if (raiz == NULL){
-    return -1;
- }
- return (NodeHeight(raiz->LeftNode) - NodeHeight(raiz->RightNode));
+int AVL::SetBalanceFactor(TreePointer &raiz) {
+    if (raiz == NULL) return -1;
+    return (NodeHeight(raiz->LeftNode) - NodeHeight(raiz->RightNode));
 }
 
-int AVL::NodeHeight(TreePointer raiz){
-    if (raiz == NULL){
-        return -1;
-    }
+int AVL::NodeHeight(TreePointer raiz) {
+    if (raiz == NULL) return -1;
     return 1 + max(NodeHeight(raiz->LeftNode), NodeHeight(raiz->RightNode));
 }
 
-void AVL::SimpleLeftRotation(TreePointer &raiz){
+void AVL::SimpleLeftRotation(TreePointer &raiz) {
     TreePointer temp = raiz->RightNode;
     raiz->RightNode = temp->LeftNode;
     temp->LeftNode = raiz;
@@ -61,7 +52,7 @@ void AVL::SimpleLeftRotation(TreePointer &raiz){
     raiz->BalanceFactor = SetBalanceFactor(raiz);
 }
 
-void AVL::SimpleRightRotation(TreePointer &raiz){
+void AVL::SimpleRightRotation(TreePointer &raiz) {
     TreePointer temp = raiz->LeftNode;
     raiz->LeftNode = temp->RightNode;
     temp->RightNode = raiz;
@@ -77,125 +68,92 @@ void AVL::BalanceTree(TreePointer &raiz) {
     raiz->BalanceFactor = SetBalanceFactor(raiz);
 
     if (raiz->BalanceFactor > 1 && SetBalanceFactor(raiz->LeftNode) >= 0) {
-        SimpleRightRotation(raiz); // CASO 1-) SIMPLES
-    }
-    else if (raiz->BalanceFactor < -1 && SetBalanceFactor(raiz->RightNode) <= 0) {
-        SimpleLeftRotation(raiz); // CASO 2-) SIMPLES
-    }
-    else if (raiz->BalanceFactor > 1 && SetBalanceFactor(raiz->LeftNode) < 0) {
-        SimpleLeftRotation(raiz->LeftNode); 
-        SimpleRightRotation(raiz); // CASO 3-) DUPLA         
-    }
-    else if (raiz->BalanceFactor < -1 && SetBalanceFactor(raiz->RightNode) > 0) {
-        SimpleRightRotation(raiz->RightNode); 
-        SimpleLeftRotation(raiz); // CASO 4-) DUPLA
+        SimpleRightRotation(raiz);
+    } else if (raiz->BalanceFactor < -1 && SetBalanceFactor(raiz->RightNode) <= 0) {
+        SimpleLeftRotation(raiz);
+    } else if (raiz->BalanceFactor > 1 && SetBalanceFactor(raiz->LeftNode) < 0) {
+        SimpleLeftRotation(raiz->LeftNode);
+        SimpleRightRotation(raiz);
+    } else if (raiz->BalanceFactor < -1 && SetBalanceFactor(raiz->RightNode) > 0) {
+        SimpleRightRotation(raiz->RightNode);
+        SimpleLeftRotation(raiz);
     }
 }
-
 
 int AVL::FindMin(TreePointer &raiz) {
     if (raiz->LeftNode == NULL) 
         return raiz->Entry;
     return FindMin(raiz->LeftNode);
-};
+}
 
-void AVL::Remove(TreePointer &raiz, int n)
-{
-    if (n < raiz->Entry)
-        Remove(raiz->LeftNode, n);
-    else if (n > raiz->Entry)
-        Remove(raiz->RightNode, n);
-    if (n == raiz->Entry){
-        TreePointer p = raiz; // ponteiro auxiliar
+void AVL::Remove(TreePointer &raiz, int n) {
+    if (raiz == NULL) return;
 
-        if (raiz->LeftNode == NULL && raiz->RightNode == NULL) { // CASO 1-)
+    if (n < raiz->Entry) Remove(raiz->LeftNode, n);
+    else if (n > raiz->Entry) Remove(raiz->RightNode, n);
+    else {
+        TreePointer p = raiz;
+
+        if (raiz->LeftNode == NULL && raiz->RightNode == NULL) {
             delete p;
             raiz = NULL;
-        }
-        else if ((raiz->LeftNode == NULL && raiz->RightNode != NULL) || (raiz->LeftNode != NULL && raiz->RightNode == NULL)) // CASO 2-)
-        {
-            TreePointer tempfilho;
-            if (raiz->LeftNode == NULL) tempfilho = raiz->RightNode;
-            else tempfilho = raiz->LeftNode;
+        } else if (raiz->LeftNode == NULL || raiz->RightNode == NULL) {
+            TreePointer tempfilho = (raiz->LeftNode == NULL) ? raiz->RightNode : raiz->LeftNode;
             delete p;
             raiz = tempfilho;
-        }
-        else {   
+        } else {   
             int min = FindMin(raiz->RightNode);
             raiz->Entry = min;
             Remove(raiz->RightNode, min);
         }
+        count--;
     }
+
+    if (raiz != NULL) BalanceTree(raiz);
 }
 
-void AVL::CrescentPrintTree(TreePointer &raiz)
-{
-    if (Empty()) cout << "ARVORE VAZIA!" << endl;
+void AVL::CrescentPrintTree(TreePointer &raiz) {
     if (raiz == NULL) return;
-    else {
-        CrescentPrintTree(raiz->LeftNode);
-        cout << raiz->Entry << " [" << raiz->occur << "] - (FB: "<< SetBalanceFactor(raiz) << ")" << endl;
-        CrescentPrintTree(raiz->RightNode);
-    }
+    CrescentPrintTree(raiz->LeftNode);
+    cout << raiz->Entry << " [" << raiz->occur << "] - (FB: "<< SetBalanceFactor(raiz) << ")" << endl;
+    CrescentPrintTree(raiz->RightNode);
 }
 
-void AVL::DecrescentPrintTree(TreePointer &raiz)
-{
-    if (Empty()) cout << "ARVORE VAZIA!" << endl;
+void AVL::DecrescentPrintTree(TreePointer &raiz) {
     if (raiz == NULL) return;
-    else
-    {
-        DecrescentPrintTree(raiz->RightNode);
-        cout << raiz->Entry << " [" << raiz->occur << "]" << endl;
-        DecrescentPrintTree(raiz->LeftNode);
-    }
+    DecrescentPrintTree(raiz->RightNode);
+    cout << raiz->Entry << " [" << raiz->occur << "]" << endl;
+    DecrescentPrintTree(raiz->LeftNode);
 }
 
-bool AVL::SearchValue(TreePointer &raiz, int n)
-{
-    // ordem importante, primeiro verificar se é NULL, se verificar ENTRY primeiro da ruim
+bool AVL::SearchValue(TreePointer &raiz, int n) {
     if (raiz == NULL) return false;
     if (n == raiz->Entry) return true;
-    else {
-        if (n < raiz->Entry) SearchValue(raiz->LeftNode, n);
-        else  SearchValue(raiz->RightNode, n);
-    }
+    return (n < raiz->Entry) ? SearchValue(raiz->LeftNode, n) : SearchValue(raiz->RightNode, n);
 }
 
-int AVL::ValueOccur(TreePointer &raiz, int n)
-{
-    if (raiz == NULL)
-    {
-        return 0;
-    }
-    if (n == raiz->Entry)
-    {
-        return raiz->occur;
-    }
-    else
-    {
-        if (n < raiz->Entry)
-        {
-            ValueOccur(raiz->LeftNode, n);
-        }
-        else
-        {
-            ValueOccur(raiz->RightNode, n);
-        }
-    }
+int AVL::ValueOccur(TreePointer &raiz, int n) {
+    if (raiz == NULL) return 0;
+    if (n == raiz->Entry) return raiz->occur;
+    return (n < raiz->Entry) ? ValueOccur(raiz->LeftNode, n) : ValueOccur(raiz->RightNode, n);
 }
 
-int AVL::TreeSize(TreePointer &raiz)
-{
+int AVL::TreeSize(TreePointer &raiz) {
     return count;
 }
 
-int AVL::TreeRoot(TreePointer &raiz)
-{
+int AVL::TreeRoot(TreePointer &raiz) {
     return raiz->Entry;
 }
 
-bool AVL::Empty()
-{
+bool AVL::Empty() {
     return count == 0;
+}
+
+void AVL::ClearTree(TreePointer &raiz) {
+    if (raiz == NULL) return;
+    ClearTree(raiz->LeftNode);
+    ClearTree(raiz->RightNode);
+    delete raiz;
+    raiz = NULL;
 }

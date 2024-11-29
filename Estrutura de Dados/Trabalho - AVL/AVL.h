@@ -23,6 +23,7 @@ class AVL {
         void SimpleLeftRotation(TreePointer &raiz);
         void CrescentPrintTree(TreePointer &raiz);
         void DecrescentPrintTree(TreePointer &raiz);
+        void ClearTree(TreePointer &raiz);
         bool SearchValue(TreePointer &raiz, int n);
         int FindMin(TreePointer &raiz);
         int ValueOccur(TreePointer &raiz, int n);

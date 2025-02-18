@@ -1,46 +1,80 @@
 /*
-Busca Binária
+Busca Binária com Bubble Sort
 */
 
-#include <iostream>
-#include <vector>
-#include <string>
-#include <algorithm>  // lib para uso da funçao sort()
-#include <ctime>      // lib para medir o tempo
-#include <iomanip>    // lib para manipulaçao da saida
+#include <iostream>     // Para entrada e saída (cout, cin)
+#include <vector>       // Para usar o container vector
+#include <string>       // Para manipular strings
+#include <ctime>        // Para medir o tempo (clock, CLOCKS_PER_SEC)
+#include <iomanip>      // Para formatar a saída (fixed, setprecision)
+#include <algorithm>    // Para usar swap()
 
 using namespace std;
 
-// Funçao de busca binária
-// Observação: Pressupoe que o vetor nomes esteja ordenado
-// a funçao procura pela chave utilizando o método de divisão e conquista
-// retorna o indice do elemento quando encontrado ou -1
-int buscaBinaria(const vector<string>& nomes, const string& chave){
-    int inicio = 0; // indice inicial do intervalo de busca
+// Função Bubble Sort
+// Ordena o vetor 'nomes' em ordem lexicográfica (crescente)
+void bubbleSort(vector<string>& nomes) {
+    bool trocou;  // Flag para indicar se houve troca nesta passagem
 
-    // converte o tamanho do vetor para int e define o indice final
+    // Laço externo: determina quantas passagens serão feitas.
+    // Para um vetor com n elementos, são necessárias (n - 1) passagens no pior caso.
+    // Se nomes.size() for 200, i varia de 0 até 198 (totalizando 199 passagens).
+    for (size_t i = 0; i < nomes.size() - 1; i++) {
+        trocou = false;  // Reinicia a flag para cada passagem
+
+        // Laço interno: percorre o vetor até o último elemento não ordenado.
+        // A condição "j < nomes.size() - 1 - i" garante que:
+        // 1) "- 1" evita acesso fora do limite, já que comparamos nomes[j] com nomes[j+1].
+        // 2) "- i" descarta os últimos 'i' elementos, que já estão ordenados.
+        // Exemplo:
+        // - Na primeira passagem (i = 0): j varia de 0 até (200 - 1 - 0) = 199, ou seja, 199 iterações.
+        // - Na segunda passagem (i = 1): j varia de 0 até (200 - 1 - 1) = 198 iterações.
+        // ...
+        // No pior caso, o total de iterações é:
+        // 199 + 198 + 197 + ... + 1 = (199 * 200) / 2 = 19.900 iterações.
+        for (size_t j = 0; j < nomes.size() - 1 - i; j++) {
+            // Se o elemento atual for maior que o próximo, troca-os.
+            if (nomes[j] > nomes[j + 1]) {
+                swap(nomes[j], nomes[j + 1]);
+                trocou = true;  // Indica que houve uma troca nesta passagem
+            }
+        }
+        // Se não ocorrer nenhuma troca, o vetor já está ordenado, então podemos sair do laço.
+        if (!trocou)
+            break;
+    }
+}
+
+// Função de Busca Binária
+// Pressupõe que o vetor 'nomes' esteja ordenado.
+// Procura a 'chave' no vetor e retorna o índice se encontrada, ou -1 se não encontrada.
+int buscaBinaria(const vector<string>& nomes, const string& chave) {
+    int inicio = 0;  // Início do intervalo de busca
+    // Calcula o índice do último elemento. Como os índices vão de 0 a (size - 1),
+    // usamos static_cast<int>(nomes.size()) - 1 para converter o tamanho para int e subtrair 1.
     int fim = static_cast<int>(nomes.size()) - 1;
-
-    // enquanto o intervalo for válido (inicio <= fim) continua a busca
-    while (inicio <= fim){
-        // calcula o índice do elemento do meio do intervalo
+    
+    // Enquanto o intervalo for válido
+    while (inicio <= fim) {
+        // Calcula o índice do elemento do meio
         int meio = inicio + (fim - inicio) / 2;
-
-        // se o elemento do meio for igual a chave, retorna o indice do meio
+        // Se o elemento do meio for igual à chave, retorna o índice
         if (nomes[meio] == chave)
             return meio;
-        // se o elemento do meio for menor que a chave, entao a chave, se existir estara na metade superior do vetor
+        // Se o elemento do meio for menor que a chave, a chave deve estar na metade superior
         else if (nomes[meio] < chave)
             inicio = meio + 1;
-        // caso contrário, a chave estará na metade inferior
+        // Caso contrário, a chave deve estar na metade inferior
         else
-            fim = meio -1;
+            fim = meio - 1;
     }
+    // Retorna -1 se a chave não for encontrada
     return -1;
 }
 
-int main(){
-
+int main() {
+    // Cria um array de ponteiros para const char com os nomes.
+    // Cada elemento do array é um ponteiro para uma string literal (o texto em si é armazenado em outra área de memória).
     const char* arr[] = {
         "Gustavo Costa", "Fabiana Barbosa", "Igor Martins", "Natália Souza", "Bruno Martins", 
         "Otávio Lima", "Carlos Almeida", "Paula Silva", "Alice Lima", "Beatriz Lima", 
@@ -84,18 +118,24 @@ int main(){
         "Amanda Silva", "Bruno Azevedo", "Gabriel Dias", "Carlos Azevedo", "Bruno Costa"
     };
 
-    // calcula o numero de elementos do array
+    // Calcula o número de elementos do array.
+    // sizeof(arr) retorna o tamanho total do array em bytes.
+    // sizeof(arr[0]) retorna o tamanho de um único elemento (um ponteiro para char).
+    // A divisão resulta no número total de elementos.
     int n = sizeof(arr) / sizeof(arr[0]);
 
+    // Preenche o vetor 'nomes' utilizando o intervalo do array.
+    // O construtor vector<string>(arr, arr + n) copia os elementos do intervalo [arr, arr + n)
+    // para dentro do vetor, convertendo cada const char* para um objeto string.
     vector<string> nomes(arr, arr + n);
 
-    // ordena o vetor 'nomes' para que a busca binária funcione corretamente pois o algoritmo requer dados ordenados.
-    sort(nomes.begin(), nomes.end());
+    // Ordena o vetor usando o Bubble Sort (exemplo de algoritmo de ordenação)
+    bubbleSort(nomes);
 
-    // solicitaçao ao usuario
+    // Solicita a entrada do usuário para o nome a ser procurado.
     string chave;
-    cout << "Busca binária - Digite o nome completo a ser procurado: ";
-    getline(cin, chave);
+    cout << "Busca Binária com Bubble Sort - Digite o nome completo a ser procurado: ";
+    getline(cin, chave);  // Lê a linha inteira, permitindo espaços na entrada
 
     /*
     Comparação Lexicográfica de Strings
@@ -107,28 +147,23 @@ int main(){
     Se você comparar "Alice" e "Bruno", o operador < verificará primeiro os caracteres 'A' e 'B'. Como 'A' (65) é menor que 'B' (66) na tabela ASCII, a comparação determinará que "Alice" é menor que "Bruno".
     */
 
-    // inicia a mediçao do tempo
+    // Mede o tempo da busca binária usando clock()
     clock_t inicio = clock();
-
-    // chama a funçao
+    // Chama a função buscaBinaria para procurar a chave no vetor ordenado
     int indice = buscaBinaria(nomes, chave);
-
-    // captura do tempo após
     clock_t fim = clock();
+    // Calcula a duração em segundos, convertendo ticks para segundos
+    double duracao = double(fim - inicio) / CLOCKS_PER_SEC;
 
-    // calcula a duraçao da busca em segundos
-    double duracao = double(fim - inicio)/ CLOCKS_PER_SEC;
-
-    // configura a saida para exibir numeros com 6 casas
+    // Configura a saída para exibir números com notação fixa e 6 casas decimais
     cout << fixed << setprecision(6);
-    // vericaçao se o elemento foi encontrado (indice != -1) e exibe o resultado
+    // Verifica se o elemento foi encontrado e exibe o resultado
     if (indice != -1)
-        cout << "Busca Binária: " << chave << " encontrada no índice " << indice;
+        cout << "Busca Binária: '" << chave << "' encontrado no índice " << indice;
     else
-        cout << "Busca Binária: " << chave << " não encontrado.";
+        cout << "Busca Binária: '" << chave << "' não encontrado.";
+    // Exibe o tempo de execução da busca
+    cout << " Tempo: " << duracao << " segundos.\n";
 
-    // exibe o tempo de execuçao
-    cout << "Tempo: " << duracao << " segundos.\n";
-
-    return 0;
+    return 0;  // Indica que o programa terminou com sucesso
 }

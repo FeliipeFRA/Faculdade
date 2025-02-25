@@ -1,8 +1,0 @@
-/**
- * 
- */
-/**
- * 
- */
-module Ativ_AutoStand {
-}

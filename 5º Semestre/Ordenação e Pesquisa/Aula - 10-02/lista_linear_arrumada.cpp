@@ -1,10 +1,12 @@
 #include <iostream>
 #include <vector>
 #include <string>
+#include <chrono>
 #include <ctime> // lib para medir o tempo com clock() e CLOCKS_PER_SEC
 #include <iomanip> // lib para formatar a saida cout {fixed, setprecision}
 
 using namespace std;
+using namespace chrono;
 
 int buscaLinear(const vector<string>& nomes, const string& chave){
     for(size_t i = 0; i < nomes.size(); i++){
@@ -65,38 +67,27 @@ int main() {
     // sizeof(arr[0]) retorna o tamanho de apenas 1 elemento
 
     int n = sizeof(arr) / sizeof(arr[0]);
-    
-    vector<string> nomes(arr, arr + n);
+        vector<string> nomes(arr, arr + n);
 
     // solicita pro usuario a chave que vai ser procurada
     string chave;
     cout << "Busca Linear - Digite o nome a ser procurado: ";
     getline(cin, chave);
 
-    // inicia a mediçao do tempo antes de chamar a função
-    clock_t inicio = clock();
-    // chama a função 
 
+    auto inicio = high_resolution_clock::now();
     int indice = buscaLinear(nomes, chave);
-    // capturar o tempo após a execução da busca
-    clock_t fim = clock();
+    auto fim = high_resolution_clock::now();
 
-    // calcula a duração em busca 
-    double duracao = double(fim - inicio) / CLOCKS_PER_SEC;
+    double duracao = duration<double, micro>(fim - inicio).count(); // Em microssegundos
 
-    // configurar a saida para exibir numeros em notação com 6 casas decimais
     cout << fixed << setprecision(10);
-    // verifica se o elemento foi encontrado;
-
     if (indice != -1)
-        cout << "Busca Linear: " << chave << " encontrado no indice " << indice;
+        cout << "Busca Linear: " << chave << " encontrado no indice " << indice << "\n";
     else
-        cout << "Busca Linear: " << chave << " nao encontrado.";
-    // exibe o tempo de execução da nossa função de busca
+        cout << "Busca Linear: " << chave << " não encontrado.\n";
 
-    cout << "\nTempo: " << duracao << " segundos.\n";
-
-
+    cout << "Tempo: " << duracao << " microssegundos.\n";
 
     return 0;
 }

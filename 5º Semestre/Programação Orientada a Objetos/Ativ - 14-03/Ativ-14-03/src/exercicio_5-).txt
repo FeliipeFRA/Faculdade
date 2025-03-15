@@ -18,18 +18,20 @@ private void atletas_Com_Lesao(Vector<Dados_Frequencia_Cardiaca> frequencia_Palm
 b-) sem risco de lesao:
 import java.util.Vector;
 
-private void atletas_Com_Lesao(Vector<Dados_Frequencia_Cardiaca> frequencia_Palmeiras, Vector<Atletas> elenco_Palmeiras) {
-    
-    for (int i = 0; i < Dados_Frequencia_Cardiaca.size(); i++){ // vai percorrer todos os dados
-        if (frequencia_Palmeiras.get(i).getBatimentoCardiaco() < 200) { // se der menos de 200bpm ele vai buscar o nome do atleta com base no id
-            for (int j = 0 < elenco_Palmeiras.size(); j++){
-                if (frequencia_Palmeiras.get(i).getIdAtleta() == elenco_Palmeiras.get(j).getId()) {
-                    System.out.println(elenco_Palmeiras.get(j).get_Nome() + " tem risco de lesao! E nosso time nao tem mundial!");
-                }
+private void atletasSemLesao(Vector<Atletas> atletas_lesionados, Vector<Atletas> elenco_Palmeiras) { // Recebe o vetor de atletas com lesão e o vetor do elenco todo
+     
+    for (int i = 0; i < elenco_Palmeiras.size(); i++){ // vai percorrer todos os atletas do elenco
+        boolean estaLesionado = false;
+        for (int j = 0; j < atletas_lesionados.size(); j++){
+            if (atletas_lesionados.get(j).getId() == elenco_Palmeiras.get(i).getId()){
+                estaLesionado = true;  
+                break;  
             }
         }
+        if (!estaLesionado) {
+            System.out.println(elenco_Palmeiras.get(i).get_Nome() + " pode ser relacionado!");
+        }
     }
-
 }
 
 

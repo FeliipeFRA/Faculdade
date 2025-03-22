@@ -1,0 +1,4 @@
+2-) a. I, II, III, IV e V.
+3-) e. Para controlar o acesso aos atributos, é apropriado usar o modificador "private".
+Além disso, é uma boa prática escrever métodos de acesso (getters e setters) para permitir a manipulação controlada dos atributos.
+5-) b. As asserções I e II são proposições verdadeiras, e a II é uma justificativa correta da I.

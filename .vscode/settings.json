@@ -54,7 +54,8 @@
         "xtr1common": "cpp",
         "xutility": "cpp",
         "orderedlist,cpp": "cpp",
-        "xstddef": "cpp"
+        "xstddef": "cpp",
+        "ratio": "cpp"
     },
     "C_Cpp.default.compilerPath": "C:/msys64/mingw64/bin/gcc.exe"
 }

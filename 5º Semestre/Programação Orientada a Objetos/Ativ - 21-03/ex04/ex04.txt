@@ -1,7 +1,20 @@
-public String velocidadeMedia(ArrayList<MapasSegmentos> estradasCatalogadas, ) {
+public int velocidadeMedia(ArrayList<MapasSegmentos> estradasCatalogadas, int latitude_usuario, int longitude_usuario) {
         String diagnostico = "Diagnostico do veículo " + veiculo.getMarca() + " " + veiculo.getModelo() + " de placa " + veiculo.getPlaca() + ":\n";
         for (Falha falha : veiculo.getFalhas()) {
             diagnostico += falha.getNome() + ": " + falha.getDescricao() + "\n";
         }
-        return diagnostico;
+
+        int velocidade_media;
+
+        for (MapasSegmentos segmento : estradasCatalogadas.getEstradas()) {
+            if (latitude_usuario > segmento.getGPS_latitude_inicial() 
+            && latitude_usuario < segmento.getGPS_latitude_final()  
+            && longitude_usuario > segmento.getGPS_longitude_inicial()  
+            && longitude_usuario < segmento.getGPS_longitude_final() ) { // verifica se a cordenada gps do usuario esta num intervalo correspondente ao de algum segmento da lista
+                return segmento.getVelocidade_Media();
+            }
+            else {
+                return -1;
+            }
+        }
 }

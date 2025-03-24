@@ -1,0 +1,82 @@
+-- EMPRESA ACME
+DROP TABLE IF EXISTS DEPENDENTE;
+DROP TABLE IF EXISTS PROJFUNC;
+DROP TABLE IF EXISTS GERENTESDEPTO;
+DROP TABLE IF EXISTS LOCALIZACAO;
+DROP TABLE IF EXISTS PROJETO;
+DROP TABLE IF EXISTS FUNCIONARIO;
+DROP TABLE IF EXISTS DEPARTAMENTO;
+
+-- CRIAÇÃO DAS TABELAS
+CREATE TABLE Departamento
+(
+	Numero INT PRIMARY KEY,
+	Nome VARCHAR(30) NOT NULL
+);
+
+CREATE TABLE Funcionario
+(
+	Codigo INT PRIMARY KEY,
+	CPF CHAR(14) NOT NULL,
+	PrimeiroNome VARCHAR(20) NOT NULL,
+	NomeMeio VARCHAR(10),
+	Sobrenome VARCHAR(20) NOT NULL,
+	DataNasc DATE,
+	Sexo CHAR(1),
+	Salario DECIMAL(15,2),
+	Endereco VARCHAR(50),
+	idDepartamento INT,
+	idFuncSupervisor INT,
+	FOREIGN KEY (idDepartamento) REFERENCES Departamento(Numero) ON DELETE SET NULL,
+	FOREIGN KEY (idFuncSupervisor) REFERENCES Funcionario(Codigo) ON DELETE SET NULL
+);
+
+CREATE TABLE Dependente
+(
+	CPF CHAR(11) PRIMARY KEY,
+	NomeCompleto VARCHAR(50),
+	GrauParentesco VARCHAR(20),
+	Sexo CHAR(1),
+	DataNasc DATE,
+	idFuncionario INT,
+	FOREIGN KEY (idFuncionario) REFERENCES Funcionario(Codigo) ON DELETE CASCADE
+);
+
+CREATE TABLE Projeto
+(
+	Numero INT PRIMARY KEY,
+	Nome VARCHAR(20),
+	Localizacao VARCHAR(30),
+	idDeptoControl INT,
+	FOREIGN KEY (idDeptoControl) REFERENCES Departamento(Numero) ON DELETE SET NULL
+);
+
+CREATE TABLE Localizacao
+(
+	Id INT PRIMARY KEY,
+	Descricao VARCHAR(20) NOT NULL,
+	Endereco VARCHAR(50),
+	idDepartamento INT,
+	FOREIGN KEY (idDepartamento) REFERENCES Departamento(Numero) ON DELETE SET NULL
+);
+
+CREATE TABLE ProjFunc
+(
+	idFuncionario INT,
+	idProjeto INT,
+	Horas DECIMAL(5,2) NOT NULL,
+	PRIMARY KEY (idFuncionario, idProjeto),
+	FOREIGN KEY (idFuncionario) REFERENCES Funcionario(Codigo) ON DELETE CASCADE,
+	FOREIGN KEY (idProjeto) REFERENCES Projeto(Numero) ON DELETE CASCADE
+);
+
+CREATE TABLE GerentesDepto
+(
+	idFuncionario INT,
+	idDepartamento INT,
+	DataInicio DATE NOT NULL,
+	PRIMARY KEY (idFuncionario, idDepartamento),
+	FOREIGN KEY (idFuncionario) REFERENCES Funcionario(Codigo) ON DELETE CASCADE,
+	FOREIGN KEY (idDepartamento) REFERENCES Departamento(Numero) ON DELETE CASCADE
+);
+

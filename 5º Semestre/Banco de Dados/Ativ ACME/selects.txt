@@ -1,0 +1,87 @@
+-- 1. Selecionar todos os funcionários.
+SELECT * from funcionario;
+
+-- 2. Selecionar todos os departamentos.
+SELECT * from departamento;
+
+-- 3. Selecionar todos os projetos.
+SELECT * from projeto;
+
+-- 4. Selecionar todos os dependentes
+SELECT * from dependente;
+
+-- 5. Selecionar todos os funcionários que são supervisores.
+SELECT * from funcionario WHERE codigo = idFuncSupervisor;
+
+-- 6. Selecionar todos os funcionários do departamento de TI (ID igual a 3).
+SELECT * from funcionario WHERE idDepartamento = 3;
+
+-- 7. Selecionar todos os funcionários que ganham mais de R$ 5.000,00.
+SELECT * from funcionario WHERE salario > 5000;
+
+-- 8. Selecionar todos os funcionários que possuem dependentes.
+SELECT a.*, b.NomeCompleto AS Nome_Dependente
+FROM funcionario AS a
+RIGHT JOIN dependente AS b
+	ON a.Codigo = b.idFuncionario;
+
+-- 9. Selecionar todos os dependentes que são filhos.
+SELECT * FROM dependente WHERE GrauParentesco = "Filho";
+
+-- 10. Selecionar todos os projetos controlados pelo departamento de Vendas (ID igual a 1)
+SELECT * FROM projeto WHERE idDeptoControl = 1;
+
+-- 11. Selecionar todos os funcionários que participaram do Projeto Alpha (ID igual a 1).
+SELECT a.*, b.idProjeto
+FROM funcionario AS a
+RIGHT JOIN projfunc AS b
+	ON a.Codigo = b.idFuncionario
+    WHERE idProjeto = 1;
+    
+-- 12 Selecionar todos os funcionários que trabalharam mais de 6 horas em algum projeto.
+SELECT a.*, b.idProjeto, b.Horas
+FROM funcionario AS a
+RIGHT JOIN projfunc AS b
+	ON a.Codigo = b.idFuncionario
+    WHERE Horas > 6;
+    
+-- 13. Selecionar todos os funcionários que não possuem dependentes.
+SELECT a.*
+FROM funcionario AS a
+LEFT JOIN dependente AS b
+	ON a.Codigo = b.idFuncionario
+    WHERE b.CPF IS NULL;
+
+-- 14. Selecionar todos os funcionários que são gerentes de departamento
+SELECT a.*, b.idDepartamento
+FROM funcionario AS a
+RIGHT JOIN gerentesdepto AS b
+	ON a.Codigo = b.idFuncionario;
+
+-- 15. Selecionar todos os projetos localizados em São Paulo
+SELECT * FROM projeto
+WHERE localizacao = "São Paulo";
+
+-- 16. Selecionar todos os dependentes de um funcionário específico (ID igual a 15).
+SELECT b.NomeCompleto AS Nome_Dependente, a.Codigo AS Id_Funcionario, a.PrimeiroNome AS Nome_Funcionario, a.Sobrenome AS Sobrenome_Funcionario
+FROM funcionario AS a
+INNER JOIN dependente AS b
+	ON a.Codigo = b.idFuncionario
+    WHERE Codigo = 15;
+    
+-- 17. Selecionar todos os funcionários que nasceram após 1990.
+SELECT * FROM funcionario
+WHERE DataNasc > '1990-12-31';
+
+-- 18. Selecionar todos os projetos com mais de 5 funcionários alocados.
+SELECT b.Numero, b.Nome, COUNT(a.idFuncionario) AS total_funcionarios
+FROM projfunc AS a
+INNER JOIN projeto AS b ON a.idProjeto = b.Numero
+GROUP BY b.Numero, b.Nome
+HAVING COUNT(a.idFuncionario) > 5;
+
+-- 19. Selecionar todos os funcionários que trabalham no departamento de Recursos Humanos (ID igual a 4) e ganham mais de R$ 6.000,00.
+SELECT * FROM funcionario
+WHERE idDepartamento = 4 AND Salario > 6000;
+
+-- 20. 

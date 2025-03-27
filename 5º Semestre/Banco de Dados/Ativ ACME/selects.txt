@@ -84,4 +84,9 @@ HAVING COUNT(a.idFuncionario) > 5;
 SELECT * FROM funcionario
 WHERE idDepartamento = 4 AND Salario > 6000;
 
--- 20. 
+-- 20. Selecionar todos os funcionários que participaram de mais de um projeto.
+SELECT f.*
+FROM funcionario f
+INNER JOIN projfunc pf ON f.Codigo = pf.idFuncionario
+GROUP BY f.Codigo
+HAVING COUNT(pf.idProjeto) > 1;

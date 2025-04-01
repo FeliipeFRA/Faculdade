@@ -1,0 +1,3 @@
+CREATE TABLE usuario (
+    ID_Usuario INT AUTOINCREMENT PRIMARY_KEY,
+);

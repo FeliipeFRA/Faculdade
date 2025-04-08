@@ -1,0 +1,1 @@
+select * from filmes_assistidos where id_usuario = 1;

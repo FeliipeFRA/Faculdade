@@ -1,3 +1,12 @@
+DROP TABLE IF EXISTS pagamento;
+DROP TABLE IF EXISTS filmes_lista;
+DROP TABLE IF EXISTS listas;
+DROP TABLE IF EXISTS comentario;
+DROP TABLE IF EXISTS filmes_assistidos;
+DROP TABLE IF EXISTS filme;
+DROP TABLE IF EXISTS usuario;
+DROP TABLE IF EXISTS plano;
+
 CREATE TABLE plano (
 	id INT AUTO_INCREMENT PRIMARY KEY,
     nome varchar(20),
@@ -55,8 +64,8 @@ CREATE TABLE comentario (
 CREATE TABLE filmes_lista (
 	id_filmes_lista INT AUTO_INCREMENT PRIMARY KEY,
     id_lista INT,
-    id_flime INT,
-    FOREIGN KEY (id_lista) REFERENCES lista(id),
+    id_filme INT,
+    FOREIGN KEY (id_lista) REFERENCES listas(id),
     FOREIGN KEY (id_filme) REFERENCES filme(id)
 );
 

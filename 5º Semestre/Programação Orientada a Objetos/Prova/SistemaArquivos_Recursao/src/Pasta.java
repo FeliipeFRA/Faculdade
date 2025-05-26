@@ -1,4 +1,4 @@
-package entities;
+
 
 import java.util.ArrayList;
 import java.util.Date;
@@ -14,7 +14,7 @@ public class Pasta extends Item{
 	this.setConteudo(pConteudo);
     }
 
-    // Método recursivo para calcular o tamanho da pasta
+    // Mï¿½todo recursivo para calcular o tamanho da pasta
     @Override
     public long getTamanho() {
         long tamanhoTotal = 0;
@@ -27,7 +27,7 @@ public class Pasta extends Item{
         return tamanhoTotal;
     }
     
-    // Método para adicionar conteúdo à pasta
+    // Mï¿½todo para adicionar conteï¿½do ï¿½ pasta
     public void adicionarConteudo(Item conteudo) {
 	if (conteudo != null) {
 	    this.conteudo.add((Item)conteudo);
